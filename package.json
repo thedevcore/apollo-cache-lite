@@ -1,6 +1,6 @@
 {
   "name": "apollo-cache-lite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight cache implementation for Apollo Client.",
   "license": "GPL-3.0-or-later",
   "repository": "thedevcore/apollo-cache-lite",
@@ -17,7 +17,9 @@
   "scripts": {
     "test": "jest --runInBand --colors --testPathPattern",
     "test:dev": "jest --runInBand --colors --watch --testPathPattern",
-    "build": "cross-env NODE_ENV=production tsc"
+    "lint": "tslint src/**/*.ts",
+    "build": "cross-env NODE_ENV=production tsc",
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "apollo-cache": "1.3.2",
@@ -35,6 +37,7 @@
     "graphql-tools": "4.0.5",
     "jest": "24.9.0",
     "ts-jest": "24.1.0",
+    "tslint": "5.20.0",
     "typescript": "3.6.3"
   }
 }

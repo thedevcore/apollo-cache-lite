@@ -1,5 +1,5 @@
-import * as deepmerge from 'deepmerge';
 import { Cache } from 'apollo-cache';
+import * as deepmerge from 'deepmerge';
 
 import { CacheStore } from './cache-interfaces';
 
@@ -13,7 +13,9 @@ export function getHash(s: any): string {
 
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
+        // tslint:disable-next-line:no-bitwise
         hash = ((hash << 5) - hash) + char;
+        // tslint:disable-next-line:no-bitwise
         hash = hash & hash;
     }
 
@@ -27,7 +29,7 @@ export function getHashForQuery(query: Cache.ReadOptions): string {
 export function getCacheableNodes(obj: any, getIdFromNode: (o: any) => string): CacheStore {
     let nodes: CacheStore = {};
 
-    for (const key in obj) {
+    for (const key of Object.keys(obj)) {
         const value = obj[key];
 
         if (key === '__typename') {

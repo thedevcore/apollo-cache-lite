@@ -1,9 +1,9 @@
-import { ApolloCache, DataProxy, Cache } from 'apollo-cache';
+import { ApolloCache, Cache, DataProxy, Transaction } from 'apollo-cache';
 import { addTypenameToDocument } from 'apollo-utilities';
-import { DocumentNode } from 'graphql';
 import * as deepmerge from 'deepmerge';
+import { DocumentNode } from 'graphql';
 
-import { CacheStore, SerialisedState, QueryStore} from './cache-interfaces';
+import { CacheStore, QueryStore, SerialisedState } from './cache-interfaces';
 import { getCacheableNodes, getDefaultIdFromNode, getHashForQuery } from './utils';
 
 export interface ApolloCacheLiteOptions {
@@ -28,8 +28,8 @@ export class ApolloCacheLite extends ApolloCache<SerialisedState> {
         const result = this.read(query as Cache.ReadOptions<any>);
 
         return {
-            result,
-            complete: !!result
+            complete: !!result,
+            result
         };
     }
 
@@ -64,7 +64,7 @@ export class ApolloCacheLite extends ApolloCache<SerialisedState> {
             const [type, id] = options.id.split(':');
             return this.store[type][id] as T;
 
-        } catch (o_O) {
+        } catch (e) {
             return;
         }
     }
@@ -88,7 +88,7 @@ export class ApolloCacheLite extends ApolloCache<SerialisedState> {
                 queries: this.queries,
                 store: this.store
             };
-        } catch (o_O) {}
+        } catch (e) {}
 
         return this;
     }
@@ -105,15 +105,18 @@ export class ApolloCacheLite extends ApolloCache<SerialisedState> {
 
     // @TODO
     evict<TVariables = any>(query: Cache.EvictOptions<TVariables>): Cache.EvictionResult {
-        throw new Error("Method not implemented.");
+        throw new Error('[apollo-cache-lite] Method not implemented!');
     }
+
     removeOptimistic(id: string): void {
-        throw new Error("Method not implemented.");
+        throw new Error('[apollo-cache-lite] Method not implemented!');
     }
-    performTransaction(transaction: import("apollo-cache").Transaction<SerialisedState>): void {
-        throw new Error("Method not implemented.");
+
+    performTransaction(transaction: Transaction<SerialisedState>): void {
+        throw new Error('[apollo-cache-lite] Method not implemented!');
     }
-    recordOptimisticTransaction(transaction: import("apollo-cache").Transaction<SerialisedState>, id: string): void {
-        throw new Error("Method not implemented.");
+
+    recordOptimisticTransaction(transaction: Transaction<SerialisedState>, id: string): void {
+        throw new Error('[apollo-cache-lite] Method not implemented!');
     }
 }
