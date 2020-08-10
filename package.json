@@ -22,7 +22,7 @@
     "prepublish": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
-    "apollo-cache": "1.3.2",
+    "apollo-cache": "1.3.5",
     "apollo-utilities": "1.3.2",
     "deepmerge": "4.0.0"
   },
