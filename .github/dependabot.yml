@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: apollo-server-core
+    versions:
+    - 2.19.1
+    - 2.19.2
+  - dependency-name: apollo-server-express
+    versions:
+    - 2.19.1
+    - 2.19.2
+  - dependency-name: graphql-tools
+    versions:
+    - 7.0.2
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
